@@ -17,6 +17,23 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 
+app.post('/register',async (req,res) => {
+    const listId = process.env.AUDIENCE_ID;
+    const subscribingUser = {
+      firstName: req.body.name,
+      email: req.body.email
+    };
+    
+    const response = await mailchimp.lists.addListMember(listId, {
+        email_address: subscribingUser.email,
+        status: "pending",
+        merge_fields: {
+            FNAME: subscribingUser.firstName
+        }
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`connected to port ${PORT}`);
 });
