@@ -18,7 +18,7 @@ const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
   apiKey: process.env.API_KEY,
-  server: "YOUR_SERVER_PREFIX"
+  server: "us4"
 });
 
 
