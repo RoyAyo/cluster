@@ -25,6 +25,7 @@ mailchimp.setConfig({
 app.post('/register',async (req,res) => {
     try {
         const listId = process.env.AUDIENCE_ID;
+        console.log(listId)
         const subscribingUser = {
         firstName: req.body.name,
         email: req.body.email
@@ -36,18 +37,21 @@ app.post('/register',async (req,res) => {
             merge_fields: {
                 FNAME: subscribingUser.firstName
             }
+        })
+        .catch(e => {
+            return res.status(400).json({
+                success: true,
+                msg : 'User already a member'
+            });
         });
-
-        console.log(response);
-
         res.json({
             success: true,
-            msg : 'Successfully added the users'
+            msg : 'Successfully added the user'
         });
     } catch (e) {
         res.status(500).json({
             success: true,
-            msg : 'Successfully added the users'
+            msg : e.message
         });
     }
 });
