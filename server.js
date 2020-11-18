@@ -40,7 +40,7 @@ app.post('/register',async (req,res) => {
         })
         .catch(e => {
             return res.status(400).json({
-                success: true,
+                success: false,
                 msg : 'User already a member'
             });
         });
@@ -50,7 +50,7 @@ app.post('/register',async (req,res) => {
         });
     } catch (e) {
         res.status(500).json({
-            success: true,
+            success: false,
             msg : e.message
         });
     }
