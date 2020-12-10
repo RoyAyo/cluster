@@ -25,7 +25,6 @@ mailchimp.setConfig({
 app.post('/register',async (req,res) => {
     try {
         const listId = process.env.AUDIENCE_ID;
-        console.log(listId)
         const subscribingUser = {
         firstName: req.body.name,
         email: req.body.email
@@ -33,7 +32,7 @@ app.post('/register',async (req,res) => {
         
         const response = await mailchimp.lists.addListMember(listId, {
             email_address: subscribingUser.email,
-            status: "pending",
+            status: "subscribed",
             merge_fields: {
                 FNAME: subscribingUser.firstName
             }
